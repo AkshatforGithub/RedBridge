@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./server
+    container_name: redbridge-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/redbridge
+    volumes:
+      - ./server/uploads:/app/uploads
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./client
+    container_name: redbridge-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

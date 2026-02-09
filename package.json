@@ -1,0 +1,27 @@
+{
+  "name": "redbridge",
+  "version": "1.0.0",
+  "description": "RedBridge - Blood donation matching platform with AI",
+  "main": "server/index.js",
+  "scripts": {
+    "server": "cd server && npm start",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "cd client && npm run build",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install"
+  },
+  "keywords": [
+    "blood",
+    "donation",
+    "ocr",
+    "mern"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4"
+  }
+}
