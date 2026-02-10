@@ -127,7 +127,7 @@ const NeederRegistration = () => {
                         name: data.aadhaarData.name || prev.name,
                         age: data.aadhaarData.age || prev.age,
                         gender: data.aadhaarData.gender || prev.gender,
-                        aadhaarNumber: data.aadhaarData.number || prev.aadhaarNumber
+                        aadhaarNumber: data.aadhaarData.aadhaarNumber || prev.aadhaarNumber
                     }));
                     toast.success('Aadhaar details extracted successfully!');
                 }
