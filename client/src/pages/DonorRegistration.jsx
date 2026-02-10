@@ -230,7 +230,13 @@ const DonorRegistration = () => {
             if (formData[key]) data.append(key, formData[key]);
         });
         if (files.aadhaar) data.append('aadhaar', files.aadhaar);
-        if (files.bloodReport) data.append('bloodReport', files.bloodReport);
+        if (files.bloodReport) {
+            data.append('bloodReport', files.bloodReport);
+        } else if (formData.bloodGroup) {
+            // Manual blood group entry
+            data.append('bloodGroupSource', 'manual');
+            data.append('manualBloodGroup', formData.bloodGroup);
+        }
 
         try {
             const response = await fetch(`${API_URL}/donors/register`, {
