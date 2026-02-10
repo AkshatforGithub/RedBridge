@@ -19,6 +19,7 @@ const DonorRegistration = () => {
         age: '',
         gender: 'Male',
         phone: '',
+        email: '',
         bloodGroup: '',
 
         // Step 2: Documents
@@ -160,8 +161,12 @@ const DonorRegistration = () => {
     const validateStep = (step) => {
         switch (step) {
             case 1:
-                if (!formData.name || !formData.age || !formData.phone) {
+                if (!formData.name || !formData.age || !formData.phone || !formData.email) {
                     toast.error('Please fill in all personal information');
+                    return false;
+                }
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+                    toast.error('Please enter a valid email address');
                     return false;
                 }
                 if (formData.age < 18 || formData.age > 65) {
@@ -365,6 +370,21 @@ const DonorRegistration = () => {
                                             onChange={handleChange}
                                             className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-red-500 focus:ring-4 focus:ring-red-100 transition-all focus:scale-[1.01] hover:shadow-md"
                                             placeholder="Your phone"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                                            Email *
+                                        </label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-red-500 focus:ring-4 focus:ring-red-100 transition-all focus:scale-[1.01] hover:shadow-md"
+                                            placeholder="your.email@example.com"
                                             required
                                         />
                                     </div>
@@ -575,6 +595,10 @@ const DonorRegistration = () => {
                                         <div>
                                             <p className="text-slate-600">Phone:</p>
                                             <p className="font-medium text-slate-900">{formData.phone}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-slate-600">Email:</p>
+                                            <p className="font-medium text-slate-900">{formData.email}</p>
                                         </div>
                                     </div>
                                 </div>
