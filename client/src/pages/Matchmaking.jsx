@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaHeart, FaHandHoldingHeart, FaSearch, FaFilter, FaMapMarkerAlt, FaPhoneAlt, FaUser, FaSortAmountDown, FaFileAlt } from 'react-icons/fa';
 import { LogoIcon } from '../components/Icons';
+import API_URL from '../config/api';
 
 const Matchmaking = () => {
   const [donors, setDonors] = useState([]);
@@ -22,8 +23,8 @@ const Matchmaking = () => {
   const fetchData = async () => {
     try {
       const [donorsRes, needersRes] = await Promise.all([
-        fetch('http://localhost:5000/api/donors'),
-        fetch('http://localhost:5000/api/needers')
+        fetch(`${API_URL}/donors`),
+        fetch(`${API_URL}/needers`)
       ]);
 
       setDonors(await donorsRes.json() || []);
@@ -38,8 +39,8 @@ const Matchmaking = () => {
   const findMatches = async (id) => {
     try {
       const endpoint = mode === 'needer'
-        ? `http://localhost:5000/api/match/needer/${id}?maxDistance=${radius}`
-        : `http://localhost:5000/api/match/donor/${id}?maxDistance=${radius}`;
+        ? `${API_URL}/match/needer/${id}?maxDistance=${radius}`
+        : `${API_URL}/match/donor/${id}?maxDistance=${radius}`;
 
       const res = await fetch(endpoint);
       const data = await res.json();
@@ -363,7 +364,7 @@ const Matchmaking = () => {
                               </a>
                               {person.bloodReportFile && (
                                 <button
-                                  onClick={() => window.open(`http://localhost:5000/api/${mode === 'needer' ? 'donors' : 'needers'}/blood-report/${person._id}`, '_blank')}
+                                  onClick={() => window.open(`${API_URL}/${mode === 'needer' ? 'donors' : 'needers'}/blood-report/${person._id}`, '_blank')}
                                   title="View Report"
                                   className="w-10 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-lg flex items-center justify-center"
                                 >

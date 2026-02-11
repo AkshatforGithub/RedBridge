@@ -2,12 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaHeart, FaHandHoldingHeart, FaUsers, FaGlobeAsia } from 'react-icons/fa';
 import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 const AboutPage = () => {
     return (
         <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+            <Navbar />
 
-            {/* Hero Section */}
+            {/* Hero Section */
             <section className="relative py-24 lg:py-32 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-orange-600/20 z-0"></div>
                 <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-500/10 rounded-full blur-[120px] -z-10"></div>

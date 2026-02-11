@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import API_URL from '../config/api';
+import Navbar from '../components/Navbar';
 
 const DonorsPage = () => {
   const [needers, setNeeders] = useState([]);
@@ -12,7 +14,7 @@ const DonorsPage = () => {
 
   const fetchNeeders = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/needers');
+      const res = await fetch(`${API_URL}/needers`);
       const data = await res.json();
       setNeeders(data || []);
     } catch (error) {
@@ -27,42 +29,21 @@ const DonorsPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-pink-50 to-orange-50">
-      {/* Header */}
-      <nav className="bg-white/80 backdrop-blur-md border-b border-red-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="bg-gradient-to-br from-red-500 to-pink-600 p-2 rounded-xl shadow-lg"
-              >
-                <svg className="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
-                RedBridge
-              </span>
-            </Link>
-            <Link to="/donor-registration">
-              <button className="bg-gradient-to-r from-red-500 to-pink-600 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transition">
-                + Register as Donor
-              </button>
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
+      <div className="pt-20">
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-red-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
-              People Who Need Your Help
-            </span>
-          </h1>
-          <p className="text-xl text-gray-600">
-            {needers.length} people waiting for blood donors like you
-          </p>
-        </div>
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          {/* Hero Section */}
+          <div className="text-center mb-12">
+            <h1 className="text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-red-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
+                People Who Need Your Help
+              </span>
+            </h1>
+            <p className="text-xl text-gray-600">
+              {needers.length} people waiting for blood donors like you
+            </p>
+          </div>
 
         {/* Blood Group Filter */}
         <div className="mb-8">
@@ -158,7 +139,7 @@ const DonorsPage = () => {
                   </a>
                   {needer.bloodReportFile && (
                     <button
-                      onClick={() => window.open(`http://localhost:5000/api/needers/blood-report/${needer._id}`, '_blank')}
+                      onClick={() => window.open(`${API_URL}/needers/blood-report/${needer._id}`, '_blank')}
                       className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 rounded-xl font-semibold flex items-center justify-center hover:shadow-lg transition"
                     >
                       <svg className="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,6 +153,7 @@ const DonorsPage = () => {
             ))}
           </div>
         )}
+        </div>
       </div>
     </div>
   );
