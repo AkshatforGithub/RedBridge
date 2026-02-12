@@ -3,7 +3,7 @@ services:
   backend:
     build:
       context: ./server
-    image: redbridge-backend  # Add this line
+    image: redbridge-backend 
     container_name: redbridge-backend
     ports:
       - "5000:5000"
@@ -17,7 +17,7 @@ services:
   frontend:
     build:
       context: ./client
-    image: redbridge-frontend  # Add this line
+    image: redbridge-frontend  
     container_name: redbridge-frontend
     ports:
       - "3000:80"
