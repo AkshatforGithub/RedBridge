@@ -3,14 +3,14 @@ pipeline {
 
     environment {
         // ─── Docker Hub ───────────────────────────────────────────────
-        DOCKERHUB_USER   = 'your-dockerhub-username'          // ← change this
+        DOCKERHUB_USER   = 'akshatzzz'          
         BACKEND_IMAGE    = "${DOCKERHUB_USER}/redbridge-backend"
         FRONTEND_IMAGE   = "${DOCKERHUB_USER}/redbridge-frontend"
         IMAGE_TAG        = "${BUILD_NUMBER}"
 
         // ─── EC2 Deploy Target ────────────────────────────────────────
         EC2_USER         = 'ubuntu'
-        EC2_HOST         = 'your-elastic-ip'                  // ← change this
+        EC2_HOST         = '13.235.251.113'                  // ← change this
         APP_DIR          = '/home/ubuntu/redbridge'
     }
 
@@ -20,8 +20,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    credentialsId: 'github-creds',
-                    url: 'https://github.com/your-org/redbridge.git'  // ← change this
+                    // credentialsId: 'github-creds',
+                    url: 'https://github.com/AkshatforGithub/RedBridge'  // ← change this
             }
         }
 
@@ -188,7 +188,7 @@ pipeline {
             """
         }
         always {
-            // Clean workspace after every build
+           
             cleanWs()
         }
     }
