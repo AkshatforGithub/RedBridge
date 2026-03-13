@@ -28,7 +28,7 @@ pipeline {
         stage('Install & Test') {
             parallel {
                 stage('Backend') {
-                    tools { nodejs 'NodeJS-18' }
+                    tools { nodejs 'NodeJS-20' }
                     steps {
                         // Spin up a disposable MongoDB for integration tests
                         sh "docker run -d --name mongo-test-${BUILD_NUMBER} -p 27017:27017 mongo:6"
@@ -44,7 +44,7 @@ pipeline {
                     }
                 }
                 stage('Frontend') {
-                    tools { nodejs 'NodeJS-18' }
+                    tools { nodejs 'NodeJS-20' }
                     steps {
                         dir('client') {
                             sh 'npm ci'
