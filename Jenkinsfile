@@ -177,7 +177,6 @@ pipeline {
         }
     }
 
-    // ── Post-pipeline notifications ───────────────────────────────────
     post {
         success {
             echo """
