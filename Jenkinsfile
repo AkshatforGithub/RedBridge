@@ -156,7 +156,6 @@ pipeline {
             }
         }
 
-        // ── 7. Health check after deploy ─────────────────────────────
         stage('Health Check') {
             steps {
                 sh """
